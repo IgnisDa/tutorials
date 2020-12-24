@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # User installed apps
+    'accounts.apps.AccountsConfig',
     'notes.apps.NotesConfig',
 
     # Django addons
