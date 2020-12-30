@@ -20,6 +20,10 @@ class CustomUser(AbstractUser):
     )
     birth_date = models.DateField(null=True, blank=True)
     pro = models.BooleanField(default=False)
+    image = models.ImageField(
+        help_text=_('Image associated with the user.'), upload_to='users',
+        blank=True, null=True
+    )
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
