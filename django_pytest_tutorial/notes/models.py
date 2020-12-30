@@ -16,6 +16,9 @@ class Note(models.Model):
     owner = models.ForeignKey(
         'accounts.CustomUser', related_name='note', on_delete=models.CASCADE
     )
+    created_on = models.DateTimeField(
+        auto_now_add=True, help_text=_('The time when this note was created.')
+    )
 
     def __str__(self):
-        return f"Note by {self.owner}"
+        return f"Note by {self.owner} on {self.created_on}"
