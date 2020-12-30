@@ -1,3 +1,21 @@
 from django.db import models
+from django.utils.translation import gettext as _
 
-# Create your models here.
+
+class Note(models.Model):
+    title = models.CharField(
+        max_length=200, help_text=_('The title for the note.')
+    )
+    summary = models.TextField(
+        blank=True, null=True,
+        help_text=_('Briefly describe your note.')
+    )
+    text = models.TextField(
+        help_text=_('The actual note you want to write.')
+    )
+    owner = models.ForeignKey(
+        'accounts.CustomUser', related_name='note', on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"Note by {self.owner}"
