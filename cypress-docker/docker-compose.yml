@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    volumes:
+      - ./backend/:/app/workspace
+      - backend-cache:/app/workspace/.venv
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      API_URL: http://localhost:8000/
+      DISPLAY:
+    depends_on:
+      - backend
+      - database
+    volumes:
+      - ./frontend/:/app/workspace
+      - frontend-cache:/app/workspace/node_modules
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+  database:
+    image: postgres:13-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: admin-password
+      POSTGRES_USER: admin-user
+      POSTGRES_DB: website-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+# Volumes
+volumes:
+  backend_data:
+  postgres_data:
+  frontend-cache:
+  backend-cache:
