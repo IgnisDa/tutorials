@@ -24,6 +24,6 @@ COPY --chown=${USERNAME} pyproject.toml poetry.lock ./
 
 COPY --chown=${USERNAME} . ${APP_ROOT}
 
-RUN poetry config virtualenvs.in-project "true" && poetry install
+RUN poetry config virtualenvs.in-project "false" && poetry install
 
 CMD [ "poetry", "run", "python3", "manage.py", "runserver", "0.0.0.0:8000" ]

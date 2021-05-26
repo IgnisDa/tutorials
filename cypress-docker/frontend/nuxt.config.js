@@ -33,6 +33,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxt/http',
   ],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
@@ -47,4 +48,7 @@ export default {
     },
   },
   target: 'static',
+  http: {
+    baseUrl: 'http://localhost:8000',
+  },
 }
